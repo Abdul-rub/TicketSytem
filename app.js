@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 //SignUp User
 
 app.post("/signup", async (req, res) => {
-  const {email, password } = req.body;
+  const {email, password,username } = req.body;
   const isUser = await UserModel.findOne({ email });
   // res.send(req.body)
   if (isUser) {
@@ -34,7 +34,7 @@ app.post("/signup", async (req, res) => {
       if (err) {
         res.send({ msg: "Something went! wrong please try again " });
       }
-      const new_user = new UserModel({email, password: hash });
+      const new_user = new UserModel({username,email, password: hash });
       try {
         await new_user.save();
         res.send({ msg: "Signup Successfull" });
